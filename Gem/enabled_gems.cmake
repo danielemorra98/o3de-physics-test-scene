@@ -22,6 +22,7 @@ set(ENABLED_GEMS
     StartingPointInput
     TextureAtlas
     WhiteBox
+    ROS2
     PhysXDebug
     ImGui
 )

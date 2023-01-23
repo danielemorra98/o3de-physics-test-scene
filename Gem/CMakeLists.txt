@@ -35,13 +35,19 @@ ly_add_target(
         PUBLIC
             Include
     BUILD_DEPENDENCIES
+        PUBLIC
+            AZ::AzToolsFramework
         PRIVATE
+            Gem::ROS2.Static
             Gem::PhysX.Static
+            Gem::PhysX.Editor.Static
             Gem::ImGui.Static
             AZ::AzGameFramework
             Gem::Atom_AtomBridge.Static
 )
 
+target_depends_on_ros2_packages(Physics_Test.Static rclcpp builtin_interfaces std_msgs sensor_msgs nav_msgs urdfdom tf2_ros ackermann_msgs gazebo_msgs control_toolbox)
+# target_depends_on_ros2_packages(PandaController.Static rclcpp builtin_interfaces std_msgs sensor_msgs nav_msgs urdfdom tf2_ros ackermann_msgs gazebo_msgs control_toolbox)
 ly_add_target(
     NAME Physics_Test ${PAL_TRAIT_MONOLITHIC_DRIVEN_MODULE_TYPE}
     NAMESPACE Gem

@@ -7,5 +7,7 @@ set(FILES
     Source/PhysXJointTestComponent.h
     Source/SkidSteering.cpp
     Source/SkidSteering.h
+    Source/Manipulator/PandaManipulatorController.h
+    Source/Manipulator/PandaManipulatorController.cpp
     enabled_gems.cmake
 )
