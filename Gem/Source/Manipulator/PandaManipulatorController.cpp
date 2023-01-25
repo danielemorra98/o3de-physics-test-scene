@@ -86,10 +86,11 @@ namespace PandaRobot
     {
         double nullPosition{0};
         int counter = 1;
-        for ([[maybe_unused]] auto HingeJointId : m_hingejointsListId)
+        for (auto HingeJointId : m_hingejointsListId)
         {
-            AZStd::string panda_joint = "panda_joint" + AZStd::to_string(counter);
-            m_jointstate_msg.name.push_back(panda_joint.c_str());
+            AZStd::string panda_joint_name = GetJointName(AzToolsFramework::GetEntityById(HingeJointId));
+            m_jointstate_msg.name.push_back(panda_joint_name.c_str());
+            AZ_TracePrintf("ROS2ManipulatorController", "Joint Name: %s\n", panda_joint_name.c_str());
             m_jointstate_msg.position.push_back(nullPosition);
             counter++;
         }
@@ -119,6 +120,12 @@ namespace PandaRobot
             m_jointstate_msg.position[i] = GetJointPosition(AzToolsFramework::GetEntityById(HingeJointId));
             i++;
         }
+    }
+
+    AZStd::string ManipulatorController::GetJointName(const AZ::Entity* hingeEntity)
+    {
+        auto* hingeComponent = hingeEntity->FindComponent<PhysX::HingeJointComponent>();
+        return hingeComponent->GetJointName();
     }
 
     double ManipulatorController::GetJointPosition(const AZ::Entity* hingeEntity)

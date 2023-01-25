@@ -33,7 +33,7 @@ namespace PandaRobot
         // bool initialized{ false };
         AzToolsFramework::EntityIdList GetHingeJointsChildren(AZ::EntityId parentEntityId);
         bool HasHingeJoint(AZ::EntityId entityId);
-        // AZStd::vector<AZStd::string> GetJointNames();  // Maybe we need this function
+        AZStd::string GetJointName(const AZ::Entity* hingeEntity);  // Maybe we need this function
         void PublishMessage();
         void InitializeJointStateMessage();
         void FillMessage();
